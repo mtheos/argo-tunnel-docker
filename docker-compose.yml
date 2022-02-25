@@ -1,0 +1,16 @@
+version: '3'
+
+networks:
+  tunnel:
+    external:
+      name: tunnel
+
+services:
+  tunnel:
+    image: visibilityspots/cloudflared:latest
+    volumes:
+      - "./cloudflared:/etc/cloudflared"
+    networks:
+      - tunnel
+    entrypoint: "cloudflared tunnel --config /etc/cloudflared/tunnel.yml run"
+
