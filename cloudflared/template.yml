@@ -1,13 +1,17 @@
 tunnel: <TUNNEL_ID>
 credentials-file: /etc/cloudflared/<TUNNEL_ID>.json
 
+# Because we connect the container to a docker network (not the host network)
+# localhost won't resolve to the host machine. Instead 172.17.0.1 should be
+# used which will resolve to the host.
+
 ingress:
  - hostname: example1.com
-   service: http://localhost:8080
+   service: http://my-container:8080
  - hostname: example2.com
-   service: http://localhost:8081
+   service: http://my-other-container:8081
  - hostname: ssl.example.com
-   service: https://localhost:8082
+   service: https://172.17.0.1:8082 # server on host
    originRequest:
      originServerName: SAN # cert authorised name
      noTLSVerify: true # allow self-signed
