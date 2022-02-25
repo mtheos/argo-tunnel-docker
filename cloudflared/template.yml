@@ -1,0 +1,14 @@
+tunnel: <TUNNEL_ID>
+credentials-file: /etc/cloudflared/<TUNNEL_ID>.json
+
+ingress:
+ - hostname: example1.com
+   service: http://localhost:8080
+ - hostname: example2.com
+   service: http://localhost:8081
+ - hostname: ssl.example.com
+   service: https://localhost:8082
+   originRequest:
+     originServerName: SAN # cert authorised name
+     noTLSVerify: true # allow self-signed
+ - service: http_status:404

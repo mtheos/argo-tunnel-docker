@@ -1,0 +1,3 @@
+cloudflared/*.json
+cloudflared/*.yml
+!cloudflared/template.yml
