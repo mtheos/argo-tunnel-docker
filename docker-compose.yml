@@ -12,5 +12,6 @@ services:
       - "./cloudflared:/etc/cloudflared"
     networks:
       - tunnel
+    restart: unless-stopped
     entrypoint: "cloudflared tunnel --config /etc/cloudflared/tunnel.yml run"
 
